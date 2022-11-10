@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+
+import subprocess
+from termcolor import colored 
+
+import pyfiglet
+
+ascii_banner=pyfiglet.figlet_format("S_alk")
+print(ascii_banner)
+print("-----Ping-----")
+print ("")
+
+
+host = input ("Enter the ip: ")
+result=subprocess.call(['ping','-c','2',host],stdout = subprocess.PIPE)
+
+if result == 0:
+	print(colored('The Host is UP','green'))
+else:
+	print(colored('The Host is Down','red'))
