@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+from urllib.request import urlopen
+import hashlib
+from termcolor import colored
+
+## Cyber Python 
+## TechCampus.com
+print(r"""
+
+    _____________
+   /      _      \
+   [] :: (_) :: []
+   [] ::::::::: []
+   [] ::::::::: []
+   [] ::::::::: []
+   [] ::YASER:: []
+   [_____________]
+       I     I
+       I_   _I
+        /   \
+        \   /
+        (   )
+        /   \
+        \___/
+
+                """)
+print("--------- TechCampus.com ---------")
+print("---------  Cyber Python  ---------")
+print("")
+
+hash = "286755fad04869ca523320acce0dc6a4"
+
+pass_file = str(urlopen("https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt").read(), 'UTF-8')
+pass_line = pass_file.split("\n")
+
+for password in pass_line:
+        byte_password = bytes(password, 'UTF-8')
+        hash_pw = hashlib.md5(byte_password)
+        random_hashed_pw = hash_pw.hexdigest()
+
+        if hash == random_hashed_pw:
+                print(colored(f'The password is {password}', 'green'))
+                break
+        else:
+                print(colored(f'The password {password} is wrog', 'red'))
+
