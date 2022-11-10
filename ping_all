@@ -1,0 +1,32 @@
+
+#!/usr/bin/python3
+
+
+import subprocess
+from termcolor import colored 
+
+import pyfiglet
+
+ascii_banner=pyfiglet.figlet_format("S_alk")
+print(ascii_banner)
+print("-----Ping-All-Device-----")
+print ("")
+
+
+
+count=0
+
+for ping in range(0,255):
+	host="192.168.1."+str(ping)
+	#host=input("What is the IP: " )
+	
+	result = subprocess.call(['ping', '-c','1' , host], stdout = subprocess.PIPE)
+	if result ==0:
+		
+		print(host,(colored('- the host is UP','green')))
+		
+	else:
+		print(host,(colored('- the host is Down','red')))
+	count=count+1
+
+print("Scanned",count,"System")
