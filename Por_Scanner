@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+
+from socket import *
+import sys
+import time
+import datetime
+from termcolor import colored 
+import subprocess
+
+import pyfiglet
+
+ascii_banner=pyfiglet.figlet_format("S_alk")
+print(ascii_banner)
+print("-----S_ALK-Port-Scanner-----")
+print ("")
+
+if len (sys.argv)==1: sys.exit("S_ALK|Scan Error(check the option)")
+
+host=sys.argv[1]
+start_port=int(sys.argv[2])
+end_port=int(sys.argv[3])
+active_ports=[]
+
+start_time = datetime.datetime.now()
+print ("Start Scanning","at",start_time)
+print ("S_ALK report for",host)
+print ("Port range from ",start_port,"to",end_port)
+print ("\n")
+for port in range (start_port,end_port):
+	s=socket(AF_INET,SOCK_STREAM)
+	result=s.connect_ex((host,port))
+
+	if result ==0:
+		print ("port",port,colored("is open",'green'))
+		active_ports.append(port)
+	else:
+		print ("port",port,colored ("is closed",'red'))
+		time.sleep(3)
+
+end_time =datetime.datetime.now()
+print("\n")
+print("The end time is:",end_time,"the open ports are:",active_ports)
+print ("S_ALK sacanner complet...")
